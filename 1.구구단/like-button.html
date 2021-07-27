@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좋아요</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 뷰가 알아서 화면을 바꿔준다. -->
+        <!-- vue에서의 if else는 형제태그면서 인접해야한다. -->
+        <!-- v-가 붙으면 함수를 다 넣을 수 있다.-->
+        <div v-if="liked"> 좋아요 </div>
+        <button v-else v-on:click="onClickButton">Like</button>
+    </div>
+</body>
+<script>
+    //vue가 el을 통제하도록 한다.
+    const app = new Vue({
+        //el,data,methods는 반드시 넣어 줘야한다.
+        el: '#root',
+        data : {
+            liked: false,
+        },
+        methods: {
+            onClickButton(){
+                //this는 data를 가리킴
+                this.liked = true;
+            }
+        }
+    })
+</script>
+</html>
