@@ -9,7 +9,29 @@
 </head>
 <body>
     <div id='root'>
-
+        <!-- 데이터 텍스트에서 보여주기는 중괄호 두개 -->
+        <div>{{first}}곱하기 {{ second }}는?</div>
+        <form>
+            <!-- v-model을 통해 실시간으로 변경시켜줌 (양방향 바인드) 라고함 -->
+            <input type='number' v-model='value'/>
+            <button>입력</button>
+        </form>
+        <div id="result">{{ result }} 값 : {{ first * second }}</div>
     </div>
+    <script>
+        const app = new Vue ({
+            el : "#root",
+            //data를 선언한다고 생각하면 됨.
+            data: {
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value:'',
+                result:'',
+            },
+            methods: {
+
+            },
+        })
+    </script>
 </body>
 </html>
