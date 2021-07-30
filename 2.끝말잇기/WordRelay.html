@@ -9,20 +9,31 @@
 </head>
 <body>
     <div id='root'>
-        <div> {{ word }}</div>
-        <form v-on:submit="onSubmitForm">
-            <input type='text' ref="answer" v-model='value'/>
-            <button type='submit'>입력</button>
-        </form>
-        <div>{{ result }}</div>
+       <word-relay/>
     </div>
     <script>
-        const app = new Vue({
-            el : "#root",
-            data: {
-                word: '이순명',
-                value:'',
-                result:'',
+        //컴포넌트생성
+        Vue.component('word-relay', {
+            //백틱은 문자열
+            //vue 컴포넌트의 템플릿은 항상 최상위의 div가 있어야한다.
+            template: `
+            <div>
+                <div> {{ word }}</div>
+                    <form v-on:submit="onSubmitForm">
+                        <input type='text' ref="answer" v-model='value'/>
+                        <button type='submit'>입력</button>
+                    </form>
+                <div>{{ result }}</div>
+            </div>
+            `,
+            //컴포넌트의 data는 다르다.
+            //함수형태여야한다. 리액트의 렌더와 같은 개념
+            data(){
+                return {
+                    word: '이순명',
+                    value:'',
+                    result:'',
+                };
             },
             methods:{
                 onSubmitForm(e){
@@ -38,6 +49,18 @@
                 this.$refs.answer.focus();
 
                 }
+            }
+        });
+    </script>
+    <script>
+        const app = new Vue({
+            //모든 화면을 만들어 놓는다.
+            el : "#root",
+            data: {
+               
+            },
+            methods:{
+             
             },
             
         })
