@@ -9,11 +9,16 @@
 </head>
 <body>
     <div id='root'>
-       <word-relay/>
+        <!-- html 단에서는 케밥케이스(word-reply)로 쓰면 뷰 컴포넌트에서는 케멀케이스(wordRelay)로 받을 수 있따. -->
+       <word-relay start-word="이순명"></word-relay>
+       <word-relay start-word="새로운"></word-relay>
+       <word-relay start-word="Props"></word-relay>
     </div>
     <script>
         //컴포넌트생성
-        Vue.component('word-relay', {
+        //컴포넌트는 vue 인스턴스보다는 위에 있어야 한다.
+        //지역컴포넌트와 전역 컴포넌트가 있다.
+        Vue.component('wordRelay', {// 전역 컴포넌트
             //백틱은 문자열
             //vue 컴포넌트의 템플릿은 항상 최상위의 div가 있어야한다.
             template: `
@@ -26,11 +31,14 @@
                 <div>{{ result }}</div>
             </div>
             `,
+            //뷰 단에서는 케멀케이스로 받아도 상관없다.
+            props:['startWord'],
+            
             //컴포넌트의 data는 다르다.
             //함수형태여야한다. 리액트의 렌더와 같은 개념
             data(){
                 return {
-                    word: '이순명',
+                    word: this.startWord,
                     value:'',
                     result:'',
                 };
@@ -53,6 +61,7 @@
         });
     </script>
     <script>
+        //vue 인스턴스라고함
         const app = new Vue({
             //모든 화면을 만들어 놓는다.
             el : "#root",
