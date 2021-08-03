@@ -8,15 +8,18 @@
         </form>
         <div>시도 :{{tries.length}}</div>
         <ul>
+                <!-- for문 사용시 주의 앞은 for,if,try, 와같은 문은 쓰면 안된다. -->
             <li v-for="t in tries">
                 <div>{{t.try}}</div>
                 <div>{{t.result}}</div>
+                <div>{{t.test}}</div>
                 </li>
         </ul>
     </div>
 </template>
 
 <script>
+    //무작위 번호 4개 뽑는 함수
     const getNumbers = () =>{
         const candidates = [1,2,3,4,5,6,7,8,9];
         const array = [];
@@ -34,6 +37,7 @@
                 value: '',
                 result: '',
                 answer: getNumbers(),
+                test: 1,
             }
         },
         methods: {
@@ -42,6 +46,7 @@
                     this.tries.push({
                         try: this.value,
                         result: '홈런',
+                        test: this.test + 1,
                     });
                     this.result = '홈런';
                     alert('게임을 다시 실행합니다.');
