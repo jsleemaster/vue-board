@@ -28,6 +28,7 @@ module.exports = {
     //entry 에서 지정한 이름을 출력에서 사용할 이름으로 변경 
     output: {
         //최종 결과물로 보낼 것 [name]은 app으로 변경가능 서로 
+        //어떤 파일이든 자바스크립트 파일 하나로 합친다.
         filename: '[name].js',
         //경로
         path: path.join(__dirname, './dist'),

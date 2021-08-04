@@ -3,7 +3,7 @@
         <h1>{{result}}</h1>
         <!-- <form v-on:submit="onSubmitForm"> -->
         <form @submit.prevent="onSubmitForm">
-            <input ref="answer" maxlength="4" v-model="value" />
+            <input type="number" ref="answer" maxlength="4" v-model="value" />
             <button>입력</button>
         </form>
         <div>시도 :{{tries.length}}</div>
@@ -12,7 +12,6 @@
             <li v-for="t in tries">
                 <div>{{t.try}}</div>
                 <div>{{t.result}}</div>
-                <div>{{t.test}}</div>
                 </li>
         </ul>
     </div>
@@ -33,11 +32,10 @@
 
         data() {
             return {
-                tries: [],
-                value: '',
+                tries: [], //시도 수
+                value: '', // 
                 result: '',
-                answer: getNumbers(),
-                test: 1,
+                answer: getNumbers(), //ex ) [1,5,6,3]
             }
         },
         methods: {
@@ -46,7 +44,6 @@
                     this.tries.push({
                         try: this.value,
                         result: '홈런',
-                        test: this.test + 1,
                     });
                     this.result = '홈런';
                     alert('게임을 다시 실행합니다.');
@@ -79,6 +76,7 @@
                         result : `${strike} 스트라이크, ${ball} 볼입니다.`,
                     })
                 }
+                this.test + 1,
                 this.value = "";
                 this.$ref.answer.focus();
             }
