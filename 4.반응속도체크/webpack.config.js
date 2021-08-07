@@ -14,12 +14,20 @@ module.exports = {
     entry: {
         app: path.join(__dirname, './main.js'),
     },
+    //자바스크립트가 아닌애들을 자바스크립트로 바꿔주는 역할 (부가적인 역할)
     module: {
         //합칠때 어떻게 처리할건지를 여기에 작성
         rules: [{
             //.vue를 js식으로 읽기위해 값을 넣어줘야함
             test: /\.vue$/,
             loader: 'vue-loader',
+        }, {
+            test: /\.css$/,
+            //style을 추가했기에 룰을 하나 추가해야한다.
+            use: [
+                'vue-style-loader',
+                'css-loader',
+            ]
         }],
     },
     plugins: [
