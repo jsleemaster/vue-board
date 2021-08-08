@@ -3,12 +3,13 @@
         <!-- 클래스에 데이터를 넣고 싶으면 바인드를 넣어준다. -->
         <!-- v-bind 의 축약형 => : -->
         <div id='screen' :class="state" @click="onClickScreen">{{message}}</div>
-        <div>
+        <!-- 쓸데없이 div로 묶고 싶지 않으면 template을 쓴다. -->
+        <template v-if="result.length">
             <!-- 평균구하는 코드-->
             <!-- 배열을 다 더하는 함수 -->
-            <div> 평균시간 : {{result.reduce((a,c) => a+c,0)/result.length|| 0}} ms</div>
+            <div> 평균시간 : {{average}} ms</div>
             <button @click="onReset">리셋</button>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -24,6 +25,12 @@
                 result:[],
                 state:'waiting',
                 message:'클릭해서 시작하세요.',
+            }
+        },
+        //값이 캐싱이 되기 때문에 computed를 씀
+        computed: {
+            average() {
+                return this.result.reduce((a , c) => a + c,0) / this.result.length || 0
             }
         },
         methods: {
