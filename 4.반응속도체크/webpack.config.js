@@ -40,5 +40,7 @@ module.exports = {
         filename: '[name].js',
         //경로
         path: path.join(__dirname, './dist'),
+        //웹팩실시간으로 변경감지 경로
+        publicPath: '/dist',
     },
 };

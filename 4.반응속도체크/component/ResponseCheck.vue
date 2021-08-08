@@ -2,7 +2,7 @@
     <div>
         <!-- 클래스에 데이터를 넣고 싶으면 바인드를 넣어준다. -->
         <!-- v-bind 의 축약형 => : -->
-        <div id='screen' :class="state" >{{meesage}}</div>
+        <div id='screen' :class="state" @click="onClickScreen">{{meesage}}</div>
         <div>
             <div> 평균시간 : {{}}</div>
             <button @click="onReset">리셋</button>
@@ -23,7 +23,16 @@
         methods: {
             onReset() {
 
-            }
+            },
+            onClickScreen() {
+                if ( this.state === 'waiting') {
+                    this.state = 'ready'
+                } else if ( this.state === 'ready') {
+                    this.state = 'now'
+                } else if ( this.state === 'now') {
+                    this.state = 'waiting'
+                    };
+                },
         }
     }
 </script>
