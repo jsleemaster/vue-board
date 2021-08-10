@@ -9,7 +9,7 @@
             <button @click="onClickButton('보')">보</button>
         </div>
         <div>{{result}}</div>
-        <div>현재 : {{ score }} 점ㅇㅇ</div>
+        <div>현재 : {{ score }} 점</div>
     </div>
 </template>
 
@@ -19,6 +19,17 @@
         가위 : '-142px',
         보 : '-284px',
         }
+    let interval;
+    const scores = {
+        가위 : 1,
+        바위 : 0,
+        보 : -1
+    }
+    const computerChoice = (imgCode) => {
+        return Object.entries(rspCode).find(function(v) {
+            return v[1] === imgCode;
+        })[0];
+    }
     export default {
         data() {
             return {
@@ -35,10 +46,56 @@
                 }
             },
             methods: {
+                changeHand() {
+                    interval = setInterval(() => {
+                    if (this.imgCode === rspCode.바위 ) {
+                        this.imgCode = rspCode.가위;
+                    } else if ( this.imgCode === rspCode.가위){
+                        this.imgCode = rspCode.보;
+                    } else if ( this.imgCode === rspCode.보) {
+                        this.imgCode = rspCode.바위;
+                    }
+                }, 100);
+                },
                 onClickButton(choice) {
-                    
+                    clearInterval(interval);  
+                    const myScore = scores[choice];
+                    const cpuScore = scores[computerChoice(this.imgCode)];
+                    const diff = myScore - cpuScore;
+                    if (diff === 0 ) {
+                        this.result = '비겼습니다.';
+                    } else if ([-1,2].includes(diff) ) {
+                        this.result = "이겼습니다";
+                        this.score +=1;
+                    } else {
+                        this.result = '졌습니다';
+                        this.score -= 1;
+                    }
+                    setTimeout(()=>{
+                        this.changeHand();
+                    },1000)
                 },
             },
+            //화면에 나타나기전 실행됨
+            created() {
+                
+            },
+            //화면에 나타난 후 실행됨
+            mounted() {
+                this.changeHand();
+            },
+            //화면이 변경될 때 실행됨
+            updated() {
+
+            },
+            beforeDestroy() {
+                clearInterval(interval);
+            },
+            //화면에 있다가 없어질때 실행됨
+            destroyed(){
+
+            },
+            
                 
     }
 </script>
