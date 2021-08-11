@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import RockScissorsPaper from './component/RockScissorsPaper';
+import LottoGame from './component/LottoGame';
 
 // Vue.config.productionTip = false;
-new Vue(RockScissorsPaper).$mount('#root');
+new Vue(LottoGame).$mount('#root');

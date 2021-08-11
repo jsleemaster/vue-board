@@ -9,7 +9,7 @@
         <div>시도 :{{tries.length}}</div>
         <ul>
                 <!-- for문 사용시 주의 앞은 for,if,try, 와같은 문은 쓰면 안된다. -->
-            <li v-for="t in tries" :key="t.try">
+            <li v-for="t in tries" :key="t.id">
                 <div>{{t.try}}</div>
                 <div>{{t.result}}</div>
                 </li>
@@ -74,6 +74,7 @@
                     this.tries.push({
                         try: this.value,
                         result : `${strike} 스트라이크, ${ball} 볼입니다.`,
+                        id : new Date().getTime(),
                     })
                 }
                 this.test + 1,
