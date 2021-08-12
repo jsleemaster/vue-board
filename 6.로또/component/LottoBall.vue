@@ -1,15 +1,15 @@
 <template>
-    <div class="ball" :style="{background}">{{ numbers }}</div>
+    <div class="ball" :style="styleObject">{{ numbers }}</div>
 </template>
 <script>
     export default {
         name: 'LottoBall',
         //여기에서 강제로 변경은 불가능 변경을 요청해야함
         props: {
-            numbers : Number
+            numbers : Number,
         },
         computed: {
-            styleObject( ){
+            styleObject() {
                 let background;
                 if (this.numbers <=10 ){
                     background = 'red';
@@ -26,7 +26,7 @@
                     background
                 }
             }
-        }
+        },
     }
 </script>
 <style scoped>

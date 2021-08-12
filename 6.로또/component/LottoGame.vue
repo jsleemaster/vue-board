@@ -5,7 +5,7 @@
             <lotto-ball v-for="ball in winBalls" :key="ball" :numbers="ball"></lotto-ball>
         </div>
         <div>보너스</div>
-        <lotto-ball v-if="bonus" :bonus="bonus"></lotto-ball>
+        <lotto-ball v-if="bonus" :numbers="bonus"></lotto-ball>
         <button v-if="redo" @click="onClickRedo">한번 더</button>
     </div>    
 </template>
