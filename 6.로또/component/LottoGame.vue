@@ -42,7 +42,7 @@
         methods :{
             onClickRedo() {
                 this.winNumbers = getWinNumbers();
-                this.winBalls=[];
+                this.winBalls = [];
                 this.bonus = null;
                 this.redo = false;
                 this.showBalls();
@@ -72,7 +72,10 @@
             })
         },
         watch: {
-
+            //남발은 하지않도록 유의한다.
+            bonus(value, oldvalue){
+                //watch는 웬만하면 안쓰도록 한다.
+            }
         },
         
     }
