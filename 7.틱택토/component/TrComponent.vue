@@ -7,6 +7,11 @@
 import TdComponent from './TdComponent';
 export default {
     components: { TdComponent },
+    data(){
+        return {
+            
+        }
+    },
     props: {
         rowData: Array,
         rowIndex: Number,

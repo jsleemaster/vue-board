@@ -1,5 +1,9 @@
 <template>
-        <table-component :table-data="tableData" :turn="turn"/>
+    <div>
+        <table-component :table-data="tableData"/>
+        <p> {{turn}} 의 턴입니다.</p>
+    </div>
+
 </template>
 <script>
     import TableComponent from './TableComponent';
@@ -12,7 +16,7 @@
             return {
                 tableData: [
                     ['','',''],
-                    ['','','']
+                    ['','',''],
                     ['','','']
                 ],
                 turn : 'O',
@@ -22,6 +26,9 @@
 
         },
         methods :{
+            onChangeData(){
+                this.set(this.tableData[1],0 , 'X');
+            }
         },
         created(){
 
