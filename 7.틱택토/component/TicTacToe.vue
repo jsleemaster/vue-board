@@ -2,6 +2,7 @@
     <div>
         <table-component :table-data="tableData"/>
         <p> {{turn}} 의 턴입니다.</p>
+        <p v-if="winner">{{ winner}}님의 승리</p>
     </div>
 
 </template>
@@ -20,6 +21,7 @@
                     ['','','']
                 ],
                 turn : 'O',
+                winner : '',
             };
         },
         computed : {

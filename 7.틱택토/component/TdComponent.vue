@@ -20,6 +20,30 @@ export default {
             // this.$root.$data.tableData[this.rowIndex][this.cellIndex] = this.$root.$data.turn;
             //Vue set을 이용해야한다. 또는 this.$set()
             this.$set(rootData.tableData[this.rowIndex], this.cellIndex, rootData.turn);
+            
+            let win = false;
+            if (rootData.tableData[this.rowIndex][0] === rootData.turn && rootData.tableData[this.rowIndex][1] === rootData.turn && rootData.tableData[this.rowIndex][2] === rootData.turn ) {
+                win = true;
+            }
+            if (rootData.tableData[0][this.cellIndex] === rootData.turn && rootData.tableData[1][this.cellIndex] === rootData.turn && rootData.tableData[2][this.cellIndex] === rootData.turn ) {
+                win = true;
+            }
+            if (rootData.tableData[0][0] === rootData.turn && rootData.tableData[1][1] === rootData.turn && rootData.tableData[2][2] === rootData.turn ) {
+                win = true;
+            }
+            if (rootData.tableData[0][2] === rootData.turn && rootData.tableData[1][1] === rootData.turn && rootData.tableData[2][0] === rootData.turn ) {
+                win = true;
+            }
+            if (win) {
+                //이긴경우 3줄달성
+                rootData.winner = rootData.turn;
+                rootData.turn = 'O'
+                rootData.tableData = [['','',''],['','',''],['','','']];
+            } else {
+                //지거나 무승부
+                rootData.turn = rootData.turn === 'O' ? 'O' : 'X';
+            }
+
             rootData.turn = rootData.turn === 'O' ? 'X' : 'O';
         }
     }
