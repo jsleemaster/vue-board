@@ -2,6 +2,7 @@
     <td @click="onClickTd">{{cellData}}</td>
 </template>
 <script>
+import EventBus from '../EventBus'
 export default {
     props: {
         cellData :String,
@@ -11,8 +12,8 @@ export default {
     methods:{
         onClickTd(){
             if( this.cellData ) return;
-            //중복성 제거
-        
+            
+            EventBus.$emit('clickTd', this.rowIndex, this.cellIndex)
         }
     }
 }
