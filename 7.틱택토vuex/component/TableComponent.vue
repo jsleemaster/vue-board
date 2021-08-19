@@ -1,6 +1,6 @@
 <template>
 <table>
-    <tr-component v-for="(rowData,index) in tableData" :row-data="rowData" :row-index="index" :key="index"/>
+    <tr-component v-for="(rowData,index) in tableData" :row-index="index" :key="index"/>
 </table>
 </template>
 <script>
@@ -8,10 +8,11 @@ import TrComponent from './TrComponent.vue'
 export default {
     components: { TrComponent },
     name : 'TableComponent',
-    props: {
-        tableData : Array
+    computed: {
+        tableData(){
+            return this.$store.state.tableData;
+        }
     }
-    
 }
 </script>
 

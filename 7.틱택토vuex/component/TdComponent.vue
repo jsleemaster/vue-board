@@ -3,7 +3,6 @@
 </template>
 <script>
     import {CLICK_CELL,SET_WINNER , RESET_GAME, CHANGE_TURN, NO_WINNER} from '../store.js';
-    
 export default {
     props: {
         cellData :String,
@@ -11,6 +10,9 @@ export default {
         cellIndex : Number
     },
     computed: {
+        cellData() {
+            return this.$store.state.tableData[this.rowIndex][this.cellIndex];
+        },
         tableData(){
             return this.$store.state.tableData;
         },

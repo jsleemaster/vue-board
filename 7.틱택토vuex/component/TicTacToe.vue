@@ -1,17 +1,18 @@
 <template>
     <div>
-        <table-component :table-data="tableData"/>
         <p> {{turn}} 의 턴입니다.</p>
+        <table-component :table-data="tableData"/>
         <p v-if="winner">{{ winner}}님의 승리</p>
     </div>
 
 </template>
 <script>
     import TableComponent from './TableComponent';
-    import EventBus from '../EventBus';
+    import store from '../store'
     export default {
+        store,
         components: {
-            TableComponent
+            TableComponent,
         },
         data() {
             return {
@@ -26,7 +27,6 @@
             },
         },
         created(){
-            EventBus.$on('clickTd', this.onClickTd)
         },
         mounted(){
         },
