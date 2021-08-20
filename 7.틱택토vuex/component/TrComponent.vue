@@ -15,14 +15,15 @@ export default {
             parent: '내가 니 애비다.'      
         }
     },
+    props: {
+        rowIndex: Number,
+    },
     computed: {
         rowData(){
             return this.$store.state.tableData[this.rowIndex]
         }
     },
-    props: {
-        rowIndex: Number,
-    }
+
 }
 </script>
 <style scoped>

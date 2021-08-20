@@ -1,26 +1,28 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 
+Vue.use(Vuex);
+
 export const SET_WINNER = 'SET_WINNER'
 export const CLICK_CELL = 'CLICK_CELL'
 export const CHANGE_TURN = 'CHANGE_TURN'
 export const RESET_GAME = 'RESET_GAME'
 export const NO_WINNER = 'NO_WINNER'
 
-Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         tableData: [
             ['', '', ''],
             ['', '', ''],
-            ['', '', '']
+            ['', '', ''],
         ],
         turn: 'O',
         winner: '',
     }, // data
     getters: {
-
+        turnMessage() {
+        }
     }, // computed
     mutations: {
         [SET_WINNER](state, winner) {
