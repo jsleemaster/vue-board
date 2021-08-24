@@ -12,7 +12,6 @@ export default {
     components: { TdComponent },
     data(){
         return {
-            parent: '내가 니 애비다.'      
         }
     },
     props: {
