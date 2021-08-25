@@ -2,19 +2,22 @@
     <div>
         <mine-form/>
         <div>{{timer}}</div>
-        <table-component></table-component>
+        <table-component/>
         <div>{{result}}</div>
     </div>
 </template>
 <script>
     import { mapState} from 'vuex'
-    // import store from '../store'
-    import store, {} from '../store.js';
-// import TableComponent from '../../7.틱택토/component/TableComponent.vue';
+
+    import MineForm from './MineForm'
+    import store, {} from './store';
+    import tableComponent from './TableComponent'
 
     export default {
         store,
         components: {
+            tableComponent,
+            MineForm
         },
         computed:{ 
             ...mapState(['timer','result'])
