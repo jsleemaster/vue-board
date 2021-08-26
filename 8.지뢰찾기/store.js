@@ -60,6 +60,7 @@ export default new Vuex.Store({
             mine: 0
         },
         timer: 0,
+        halted: true, //게임이 중단됨
         result: '',
     }, // data
     getters: {
@@ -76,13 +77,16 @@ export default new Vuex.Store({
             //지뢰 심기
             state.tableData = plantMine(row, cell, mine);
             state.timer = 0;
+            state.halted = false;
         },
         [OPEN_CELL](state) { },
         [CLICK_MINE](state) { },
         [FLAG_CELL](state) { },
         [QUESTION_CELL](state) { },
         [NORMALIZE_CELL](state) { },
-        [INCREMENT_TIMER](state) { }
+        [INCREMENT_TIMER](state) {
+            state.timer += 1;
+        }
     }, // state를 수정할 때 사용 동기적으로
     actions: {
 
