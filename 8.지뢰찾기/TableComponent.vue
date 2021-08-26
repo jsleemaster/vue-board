@@ -1,16 +1,22 @@
 <template>
 <table>
     <tr v-for="(rowData, rowIndex) in tableData" :key="rowIndex">
-        <td v-for="(cellData, cellIndex) in rowData" :key="cellIndex" :style="cellDataStyle(rowIndex, cellIndex)">{{ cellDataText(rowIndex,cellIndex) }}</td>
+        <td 
+        v-for="(cellData, cellIndex) in rowData" 
+        :key="cellIndex" 
+        :style="cellDataStyle(rowIndex, cellIndex)"
+        @click="onClickTd(rowIndex, cellIndex)"
+        @contextmenu.prevent="onRightClickTd(rowIndex, cellIndex)"
+        >{{ cellDataText(rowIndex,cellIndex) }}</td>
     </tr>
 </table>
 </template>
 <script>
     import { mapState } from 'vuex';
-    import { CODE } from './store';
+    import { CODE, FLAG_CELL, NORMALIZE_CELL, OPEN_CELL, QUESTION_CELL } from './store';
     export default {
         computed:{
-            ...mapState(['tableData']),
+            ...mapState(['tableData', 'halted']),
             //고차함수 
             //함수를 확장하는 행위 -> 기능을 추가한거임
             //몇번째 열인지 행인지 확인
@@ -62,6 +68,36 @@
                 }
             }
             },
+        },
+        methods: {
+            onClickTd(row, cell){
+                //게임이 중단된경우 state에서 가져옴
+                if (this.halted) {
+                    return ;
+                }
+                this.$store.commit(OPEN_CELL, {row, cell});
+            },
+            onRightClickTd(row , cell) {
+                if (this.halted) {
+                    return ;
+                }
+                switch (this.tableData[row][cell]){
+                    case CODE.NORMAL:
+                    case CODE.MINE:
+                        this.$store.commit(FLAG_CELL, {row, cell});
+                        return;
+                    case CODE.FLAG_MINE:
+                    case CODE.FLAG:
+                        this.$store.commit(QUESTION_CELL, {row, cell});
+                        return;
+                    case CODE.QUESTION_MINE:
+                    case CODE.QUESTION:
+                        this.$store.commit(NORMALIZE_CELL, {row, cell});
+                        return;
+                    default:
+                        return;
+                }
+            }
         }
     }
 </script>
