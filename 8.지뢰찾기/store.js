@@ -62,6 +62,7 @@ export default new Vuex.Store({
         timer: 0,
         halted: true, //게임이 중단됨
         result: '',
+        openedCount: 0,
     }, // data
     getters: {
 
@@ -78,8 +79,11 @@ export default new Vuex.Store({
             state.tableData = plantMine(row, cell, mine);
             state.timer = 0;
             state.halted = false;
+            state.openedCount = 0;
+            state.result = '';
         },
         [OPEN_CELL](state, { row, cell }) {
+            let openedCount = 0;
             const checked = [];
 
             //주변 지뢰 갯수
@@ -135,10 +139,22 @@ export default new Vuex.Store({
                         }
                     });
                 }
+                if (state.tableData[row][cell] === CODE.NORMAL) {
+                    openedCount += 1;
+                }
                 Vue.set(state.tableData[row], cell, counted.length);
                 // return counted.length;
             }
-            checkAround(row, cell)
+            checkAround(row, cell);
+            let halted = false;
+            let result;
+            if (state.data.row * state.data.cell - state.data.mine === state.openedCount + openedCount) {
+                halted = true;
+                result = `${state.timer}초 만에 승리하셨습니다.`;
+            }
+            state.openedCount += openedCount;
+            state.halted = halted;
+            state.result = result;
             // const count = checkAround();
             // Vue.set(state.tableData[row], cell, count);
         },
