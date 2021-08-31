@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import MineSweeper from './MineSweeper';
+import Router from './Router.vue';
 
 // Vue.config.productionTip = false;
-new Vue(MineSweeper).$mount('#root');
+new Vue(Router).$mount('#root');
